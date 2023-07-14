@@ -1,7 +1,7 @@
 import { useData } from "../Context/CardContext";
 import { useNavigate } from "react-router-dom";
 export const Card = () => {
-  const { handleType, sortData } = useData();
+  const { handleType, sortData, meetingData } = useData();
   const navigate = useNavigate();
   return (
     <div>
