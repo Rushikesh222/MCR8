@@ -1,15 +1,15 @@
 import { useData } from "../Context/CardContext";
 import { useNavigate } from "react-router-dom";
 export const Card = () => {
-  const { handleType, meetingData } = useData();
+  const { handleType, sortData } = useData();
   const navigate = useNavigate();
   return (
     <div>
       <h1>Meeting Event</h1>
-      <select onCanPlay={handleType}>
+      <select onChange={handleType}>
         <option value="">Type</option>
-        <option value="online">Online</option>
-        <option value="offline">Offline</option>
+        <option value="Online">Online</option>
+        <option value="Offline">Offline</option>
       </select>
       <div className="Card-Container">
         {meetingData.map((items) => {
