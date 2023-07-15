@@ -1,17 +1,39 @@
-import { createContext, useContext, useState } from "react";
+import {
+  createContext,
+  useContext,
+  useState,
+  useReducer,
+  useEffect,
+} from "react";
 import { meetingData } from "../assets/Data";
+import { filterReducer } from "../Reducer/Filterreducer";
 
 export const CardContext = createContext();
 export const CardProvider = ({ children }) => {
-  const [sortData, setSortData] = useState([]);
-  //   setTags(() =>
-  //     meetingData.map((list) => list.eventTage.map((items) => items))
-  //   );
-  //   console.log(tags);
-  const handleType = (event) => {};
+  const initailFilterState = {
+    filter: "All",
+  };
+  const [filterEvent, DispatchFilter] = useReducer(
+    filterReducer,
+    initailFilterState
+  );
 
+  // const handleType = () => {
+  //   let filterData = [];
+  //   if (filterEvent.filter !== "All") {
+  //     filterData = meetingData.filter(
+  //       ({ EventType }) => EventType === filterEvent.filter
+  //     );
+  //   } else {
+  //     filterData = meetingData;
+  //   }
+  //   setSortData(filterData);
+  // };
+  // useEffect(() => handleType(), [filterEvent.filter]);
   return (
-    <CardContext.Provider value={{ handleType, meetingData }}>
+    <CardContext.Provider
+      value={{ handleType, meetingData, filterEvent, DispatchFilter, sortData }}
+    >
       {children}
     </CardContext.Provider>
   );

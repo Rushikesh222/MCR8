@@ -1,20 +1,30 @@
 import { useData } from "../Context/CardContext";
 import { useNavigate } from "react-router-dom";
 export const Card = () => {
-  const { handleType, sortData, meetingData } = useData();
+  const { meetingData, filterEvent, DispatchFilter } = useData();
   const navigate = useNavigate();
+  const filterData =
+    filterEvent.filter !== "All"
+      ? meetingData.filter(({ EventType }) => EventType === filterEvent.filter)
+      : meetingData;
   return (
     <div>
       <h1>Meeting Event</h1>
-      <select onChange={handleType}>
-        <option value="">Type</option>
-        <option value="Online">Online</option>
-        <option value="Offline">Offline</option>
+      <select
+        onChange={(e) =>
+          DispatchFilter({
+            type: "Set_filter",
+            payload: e.target.value,
+          })
+        }
+      >
+        <option value="All">All</option>
+        <option value="online">Online</option>
+        <option value="offline">Offline</option>
       </select>
       <div className="Card-Container">
-        {meetingData.map((items) => {
+        {filterData.map((items) => {
           const { image, date, title, openHour, EventType, id } = items;
-          console.log(image);
 
           return (
             <div

@@ -1,19 +1,11 @@
 export const filterReducer = (state, action) => {
   switch (action.type) {
-    case "ONLINE":
+    case "Set_filter":
       return {
         ...state,
-        rating: action.payload,
+        filter: action.payload,
       };
-    case "OFFLINE":
-      return {
-        ...state,
-        sort: action.payload,
-      };
-    case "Empty":
-      return {
-        ...state,
-      };
+
     default:
       return state;
   }
